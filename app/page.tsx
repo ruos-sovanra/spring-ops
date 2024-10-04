@@ -15,10 +15,8 @@ import {
     Star,
     ArrowRight,
     Users,
-    BarChart,
-    Navigation
+    BarChart
 } from "lucide-react"
-import NavbarComponent from "@/component/navbar/NavbarComponent";
 
 
 const automatedTexts = ['Automated', 'Simplified', 'Optimized', 'Streamlined']
