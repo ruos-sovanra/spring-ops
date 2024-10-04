@@ -3,7 +3,22 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronRight, Code, Cloud, Lock, Zap, Globe, Shield, GitCommit, Star, ArrowRight, Users, BarChart } from "lucide-react"
+import {
+    ChevronRight,
+    Code,
+    Cloud,
+    Lock,
+    Zap,
+    Globe,
+    Shield,
+    GitCommit,
+    Star,
+    ArrowRight,
+    Users,
+    BarChart,
+    Navigation
+} from "lucide-react"
+import NavbarComponent from "@/component/navbar/NavbarComponent";
 
 
 const automatedTexts = ['Automated', 'Simplified', 'Optimized', 'Streamlined']
@@ -63,7 +78,7 @@ export default function HomePage() {
     }, [])
 
     return (
-        <section className="min-h-screen bg-gray-900 text-white">
+        <section className="bg-gray-900 text-white">
             <main>
                 <section className="relative py-20 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-pink-800 to-red-900 opacity-50"></div>
