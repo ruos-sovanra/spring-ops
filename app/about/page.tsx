@@ -1,108 +1,124 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import { motion } from 'framer-motion'
-import {Linkedin, Twitter, Terminal, Server, Cloud, Code, Database, Lock, Github} from 'lucide-react'
+import {Twitter, Terminal, Server, Cloud, Code, Database, Lock, Shield, Facebook, Instagram } from 'lucide-react'
+import sovanra from '@/public/team.jpg'
+import intructor from '@/public/instructor.jpg'
+import sokny from '@/public/mehUI.jpg'
+import vathanak from '@/public/nak.jpg'
+import makara from '@/public/antony.jpg'
+import soben from '@/public/hacker.jpg'
 
 interface TeamMember {
     name: string
     position: string
-    image: string
+    image: StaticImageData
     info: string
     skills: string[]
     social: {
-        github?: string
-        linkedin?: string
         twitter?: string
+        facebook?: string
+        instagram?: string
     }
+    bgColor: string
 }
 
 const teamMembers: TeamMember[] = [
     {
-        name: "Sarah Johnson",
-        position: "Lead DevOps Engineer",
-        image: "/placeholder.svg?height=400&width=400&text=SJ",
-        info: "10+ years experience in CI/CD pipelines and cloud infrastructure",
+        name: "Ing Muyleang",
+        position: "Instructor",
+        image: intructor,
+        info: "2+ years experience in CI/CD pipelines and cloud infrastructure",
         skills: ["AWS", "Kubernetes", "Jenkins", "Terraform"],
         social: {
-            github: "https://github.com/sarahjohnson",
-            linkedin: "https://linkedin.com/in/sarahjohnson",
-            twitter: "https://twitter.com/sarahjohnson"
-        }
+            twitter: "https://twitter.com/ingmuyleang",
+            facebook: "https://facebook.com/ingmuyleang",
+            instagram: "https://instagram.com/ingmuyleang"
+        },
+        bgColor: "from-blue-400 to-blue-300"
     },
     {
-        name: "Michael Chang",
-        position: "Cloud Architect",
-        image: "/placeholder.svg?height=400&width=400&text=MC",
+        name: "Ruos Sovanra",
+        position: "Team Leader",
+        image: sovanra,
         info: "Specialist in multi-cloud environments and serverless architectures",
         skills: ["Azure", "GCP", "Serverless", "Docker"],
         social: {
-            github: "https://github.com/michaelchang",
-            linkedin: "https://linkedin.com/in/michaelchang"
-        }
+            twitter: "https://twitter.com/ruossovanra",
+            facebook: "https://facebook.com/ruossovanra",
+            instagram: "https://instagram.com/ruossovanra"
+        },
+        bgColor: "from-green-400 to-green-300"
     },
     {
-        name: "Emily Rodriguez",
-        position: "Automation Specialist",
-        image: "/placeholder.svg?height=400&width=400&text=ER",
+        name: "On Soben",
+        position: "Member",
+        image: soben,
         info: "Expert in creating scalable automation solutions for complex systems",
         skills: ["Ansible", "Python", "Bash", "Puppet"],
         social: {
-            github: "https://github.com/emilyrodriguez",
-            linkedin: "https://linkedin.com/in/emilyrodriguez",
-            twitter: "https://twitter.com/emilyrodriguez"
-        }
+            twitter: "https://twitter.com/onsoben",
+            facebook: "https://facebook.com/onsoben",
+            instagram: "https://instagram.com/onsoben"
+        },
+        bgColor: "from-pink-400 to-pink-300"
     },
     {
-        name: "David Kim",
-        position: "Security Engineer",
-        image: "/placeholder.svg?height=400&width=400&text=DK",
+        name: "Mom Makara",
+        position: "Member",
+        image: makara,
         info: "Focused on implementing DevSecOps practices and tools",
         skills: ["SAST", "DAST", "IAM", "Compliance"],
         social: {
-            github: "https://github.com/davidkim",
-            linkedin: "https://linkedin.com/in/davidkim"
-        }
+            twitter: "https://twitter.com/mommakara",
+            facebook: "https://facebook.com/mommakara",
+            instagram: "https://instagram.com/mommakara"
+        },
+        bgColor: "from-purple-400 to-purple-300"
     },
     {
-        name: "Lisa Chen",
-        position: "Site Reliability Engineer",
-        image: "/placeholder.svg?height=400&width=400&text=LC",
+        name: "Pov Sokny",
+        position: "Member",
+        image: sokny,
         info: "Ensures high availability and performance of our systems",
         skills: ["Prometheus", "Grafana", "ELK Stack", "Chaos Engineering"],
         social: {
-            github: "https://github.com/lisachen",
-            linkedin: "https://linkedin.com/in/lisachen",
-            twitter: "https://twitter.com/lisachen"
-        }
+            twitter: "https://twitter.com/povsokny",
+            facebook: "https://facebook.com/povsokny",
+            instagram: "https://instagram.com/povsokny"
+        },
+        bgColor: "from-yellow-400 to-yellow-300"
     },
     {
-        name: "Alex Novak",
-        position: "Infrastructure Engineer",
-        image: "/placeholder.svg?height=400&width=400&text=AN",
+        name: "Sol Vathanak",
+        position: "Member",
+        image: vathanak,
         info: "Designs and maintains our scalable infrastructure",
         skills: ["VMware", "OpenStack", "Networking", "Load Balancing"],
         social: {
-            github: "https://github.com/alexnovak",
-            linkedin: "https://linkedin.com/in/alexnovak"
-        }
+            twitter: "https://twitter.com/solvathanak",
+            facebook: "https://facebook.com/solvathanak",
+            instagram: "https://instagram.com/solvathanak"
+        },
+        bgColor: "from-red-400 to-red-300"
     }
 ]
 
 const DevOpsBackground = () => (
-    <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden opacity-5 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <Terminal className="w-1/3 h-1/3 text-green-500" />
+            <Terminal className="w-1/3 h-1/3 text-green-500 animate-pulse" />
         </div>
         <div className="absolute top-1/4 left-1/4 w-full h-full flex items-center justify-center">
-            <Server className="w-1/4 h-1/4 text-blue-500" />
+            <Server className="w-1/4 h-1/4 text-blue-500 animate-bounce" />
         </div>
         <div className="absolute top-1/2 left-1/2 w-full h-full flex items-center justify-center">
-            <Cloud className="w-1/3 h-1/3 text-purple-500" />
+            <Cloud className="w-1/3 h-1/3 text-purple-500 animate-pulse" />
         </div>
         <div className="absolute top-3/4 left-3/4 w-full h-full flex items-center justify-center">
-            <Code className="w-1/4 h-1/4 text-yellow-500" />
+            <Code className="w-1/4 h-1/4 text-yellow-500 animate-bounce" />
         </div>
     </div>
 )
@@ -170,7 +186,7 @@ Deployment successful!
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white relative overflow-hidden">
             <DevOpsBackground />
             <main className="container mx-auto px-4 py-16 relative z-10">
                 <motion.h1
@@ -179,7 +195,7 @@ export default function AboutPage() {
                     transition={{ duration: 0.5 }}
                     className="text-5xl md:text-6xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-blue-500 to-purple-500"
                 >
-                    AutomateX DevOps Team
+                    Spring X DevOps Team
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -194,22 +210,30 @@ export default function AboutPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
                 >
-                    <div className="bg-gray-800 p-8 rounded-lg border border-green-500">
-                        <h2 className="text-2xl font-bold mb-4 text-green-400 flex items-center">
+                    <div className="bg-gradient-to-br from-green-500 to-blue-600 p-8 rounded-lg shadow-lg">
+                        <h2 className="text-2xl font-bold mb-4 text-white flex items-center">
                             <Terminal className="mr-2" /> Our Mission
                         </h2>
-                        <p className="text-gray-300">
+                        <p className="text-gray-100">
                             To revolutionize business operations through advanced DevOps practices, enabling seamless integration, continuous delivery, and unparalleled efficiency.
                         </p>
                     </div>
-                    <div className="bg-gray-800 p-8 rounded-lg border border-blue-500">
-                        <h2 className="text-2xl font-bold mb-4 text-blue-400 flex items-center">
+                    <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-8 rounded-lg shadow-lg">
+                        <h2 className="text-2xl font-bold mb-4 text-white flex items-center">
                             <Cloud className="mr-2" /> Our Vision
                         </h2>
-                        <p className="text-gray-300">
+                        <p className="text-gray-100">
                             To create a world where every organization can harness the full potential of DevOps, driving innovation, scalability, and reliability across all industries.
+                        </p>
+                    </div>
+                    <div className="bg-gradient-to-br from-purple-500 to-pink-600 p-8 rounded-lg shadow-lg">
+                        <h2 className="text-2xl font-bold mb-4 text-white flex items-center">
+                            <Shield className="mr-2" /> Our Values
+                        </h2>
+                        <p className="text-gray-100">
+                            We prioritize collaboration, continuous learning, and innovation to deliver exceptional results and empower our clients in their digital transformation journey.
                         </p>
                     </div>
                 </motion.div>
@@ -230,51 +254,22 @@ export default function AboutPage() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+                            className="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 relative"
                         >
-                            <div className="p-6">
-                                <div className="flex items-center mb-4">
+                            <div className={`absolute inset-0 bg-gradient-to-br ${member.bgColor} opacity-20`}></div>
+                            <div className="p-6 flex flex-col items-center relative z-10">
+                                <div className="w-48 h-48 mb-4 rounded-3xl overflow-hidden">
                                     <Image
                                         src={member.image}
                                         alt={member.name}
-                                        width={60}
-                                        height={60}
-                                        className="rounded-full mr-4"
+                                        width={192}
+                                        height={192}
+                                        className="object-cover w-full h-full"
                                     />
-                                    <div>
-                                        <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                                        <p className="text-green-400 text-sm">{member.position}</p>
-                                    </div>
                                 </div>
-                                <p className="text-gray-300 text-sm mb-4">{member.info}</p>
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                    {member.skills.map((skill, skillIndex) => (
-                                        <span key={skillIndex} className="bg-gray-700 text-green-400 text-xs px-2 py-1 rounded">
-                      {skill}
-                    </span>
-                                    ))}
-                                </div>
-                                <div className="flex justify-start space-x-4">
-                                    {member.social.github && (
-                                        <a
-                                            href={member.social.github}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-gray-400 hover:text-white transition-colors duration-200"
-                                        >
-                                            <Github size={20} />
-                                        </a>
-                                    )}
-                                    {member.social.linkedin && (
-                                        <a
-                                            href={member.social.linkedin}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-gray-400 hover:text-white transition-colors duration-200"
-                                        >
-                                            <Linkedin size={20} />
-                                        </a>
-                                    )}
+                                <h3 className="text-xl font-bold text-white text-center">{member.name}</h3>
+                                <p className="text-gray-300 text-sm mb-4 text-center">{member.position}</p>
+                                <div className="flex justify-center space-x-4">
                                     {member.social.twitter && (
                                         <a
                                             href={member.social.twitter}
@@ -283,6 +278,26 @@ export default function AboutPage() {
                                             className="text-gray-400 hover:text-white transition-colors duration-200"
                                         >
                                             <Twitter size={20} />
+                                        </a>
+                                    )}
+                                    {member.social.facebook && (
+                                        <a
+                                            href={member.social.facebook}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-gray-400 hover:text-white transition-colors duration-200"
+                                        >
+                                            <Facebook size={20} />
+                                        </a>
+                                    )}
+                                    {member.social.instagram && (
+                                        <a
+                                            href={member.social.instagram}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-gray-400 hover:text-white transition-colors duration-200"
+                                        >
+                                            <Instagram size={20} />
                                         </a>
                                     )}
                                 </div>

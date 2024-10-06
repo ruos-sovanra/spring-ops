@@ -17,7 +17,9 @@ import {
     Users,
     BarChart
 } from "lucide-react"
-
+import EnhancedDevOpsTerminal from "@/component/terminal/TerminalLogComponent";
+import devops from "@/public/devops.gif"
+import Image from "next/image";
 
 const automatedTexts = ['Automated', 'Simplified', 'Optimized', 'Streamlined']
 
@@ -189,10 +191,12 @@ export default function HomePage() {
                     </div>
                 </section>
 
+                <EnhancedDevOpsTerminal/>
+
                 <section className="container mx-auto px-4 py-20">
                     <h2 className="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {projects.map((project, index) => (
+                        {projects.slice(0, 6).map((project, index) => (
                             <motion.div
                                 key={project.id}
                                 initial={{opacity: 0, y: 20}}
@@ -245,7 +249,7 @@ export default function HomePage() {
                                 </Link>
                             </div>
                             <div className="md:w-1/2">
-                                <img src="/placeholder.svg?height=300&width=400" alt="Get Started" className="rounded-lg shadow-2xl" />
+                                <Image src={devops} width={400} height={400} alt="Get Started" className="rounded-lg shadow-2xl" />
                             </div>
                         </div>
                     </div>

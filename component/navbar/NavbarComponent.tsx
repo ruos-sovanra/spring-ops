@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Menu, Moon, Sun } from 'lucide-react'
 import { useState } from 'react'
 import classNames from 'classnames'
+import springxops from '@/public/springOps.jpg'
 
 export default function NavbarComponent() {
     const [isDarkMode, setIsDarkMode] = useState(true)
@@ -27,38 +28,20 @@ export default function NavbarComponent() {
             <header className={classNames(sharedClasses.bg, 'border-b')}>
                 <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                        <div className={classNames('w-8 h-8', isDarkMode ? 'bg-white' : 'bg-black')}></div>
                         <div className="flex items-center space-x-2">
                             <Image
-                                src="/placeholder.svg?height=32&width=32"
+                                src={springxops}
                                 alt="Profile"
                                 width={32}
                                 height={32}
                                 className="rounded-full"
                             />
-                            <span className="font-semibold hidden sm:inline">jonathondmeyers</span>
+                            <span className="font-semibold hidden sm:inline">SpringOps</span>
                             <span className={classNames('px-2 py-1 text-xs rounded-full hidden sm:inline', isDarkMode ? 'bg-gray-700' : 'bg-gray-200')}>
                                 Hobby
                             </span>
                         </div>
                     </div>
-                    <nav className="hidden md:flex space-x-4">
-                        {['Feedback', 'Changelog', 'Support', 'Docs'].map((item) => (
-                            <Link key={item} href={`/${item.toLowerCase()}`} className={sharedClasses.text}>
-                                {item}
-                            </Link>
-                        ))}
-                        <Image
-                            src="/placeholder.svg?height=32&width=32"
-                            alt="Profile"
-                            width={32}
-                            height={32}
-                            className="rounded-full"
-                        />
-                        <button onClick={toggleDarkMode} className="focus:outline-none">
-                            {isDarkMode ? <Sun className={sharedClasses.icon} /> : <Moon className={sharedClasses.icon} />}
-                        </button>
-                    </nav>
                     <div className="md:hidden flex items-center space-x-4">
                         <button onClick={toggleDarkMode} className="focus:outline-none">
                             {isDarkMode ? <Sun className={sharedClasses.icon} /> : <Moon className={sharedClasses.icon} />}

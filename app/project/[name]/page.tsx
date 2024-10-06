@@ -3,6 +3,9 @@ import { ExternalLink, GitBranch } from "lucide-react"
 import {useEffect, useState} from "react";
 import {Project} from "@/app/page";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
+import devops from "@/public/devops.gif"
+import Image from "next/image";
 
 type DeploymentInfo = {
     status: string;
@@ -20,6 +23,8 @@ export type PropsParams = {
 export default function ProjectDetailPage(props: PropsParams) {
     const [projects, setProjects] = useState<Project>();
     const [deployments, setDeployments] = useState<DeploymentInfo[]>([]);
+
+    const router = useRouter();
 
     const fetchProjects = async () => {
         try {
@@ -60,6 +65,23 @@ export default function ProjectDetailPage(props: PropsParams) {
         }
     };
 
+    const handleDelete = async (name: string) => {
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/delete-job/${name}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await res.json();
+            console.log("This is response", data);
+            router.push('/project');
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         fetchProjects();
         fetchDeployments();
@@ -75,10 +97,16 @@ export default function ProjectDetailPage(props: PropsParams) {
                         <h2 className="text-xl font-semibold">Production Deployment</h2>
                         <div className="flex space-x-2">
                             <button
-                                className="bg-gray-800 text-gray-300 px-3 py-1 rounded text-sm"
+                                className="bg-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-purple-700 transition-all duration-300"
                                 onClick={() => projects?.name && handleDeploy(projects.name)}
                             >
                                 Deploy now
+                            </button>
+                            <button
+                                className="bg-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-all duration-300"
+                                onClick={() => projects?.name && handleDelete(projects.name)}
+                            >
+                                Delete now
                             </button>
                         </div>
                     </div>
@@ -86,7 +114,8 @@ export default function ProjectDetailPage(props: PropsParams) {
 
                     <div className="bg-black rounded-lg p-4 flex flex-col md:flex-row">
                         <div className="md:w-1/2 mb-4 md:mb-0">
-                            <img src="/placeholder.svg?height=300&width=400" alt="Deployment Preview" className="rounded-lg w-full h-auto" />
+                            <Image src={devops} height={300} width={300} alt="Deployment Preview"
+                                 className="rounded-lg w-full h-auto"/>
                         </div>
                         <div className="md:w-1/2 md:pl-4 space-y-4">
                             <div>
