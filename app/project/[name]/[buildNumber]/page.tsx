@@ -19,12 +19,15 @@ export default function DeploymentLogs(props: PropsParams) {
     const logContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        console.log(`Connecting to: ${process.env.NEXT_PUBLIC_BASE_URL}/stream-build-log/${name}/${buildNumber}`);
+        const url = `${process.env.NEXT_PUBLIC_BASE_URL}/stream-build-log/${name}/${buildNumber}`;
+        console.log(`Connecting to: ${url}`);
 
-        eventSourceRef.current = new EventSource(`${process.env.NEXT_PUBLIC_BASE_URL}/stream-build-log/${name}/${buildNumber}`);
+        // Create a new EventSource connection
+        eventSourceRef.current = new EventSource(url);
 
-        eventSourceRef.current.onopen = () => {
-            console.log('Connection opened');
+        // Handling the 'onopen' event with an explicit event parameter
+        eventSourceRef.current.onopen = (event: Event) => {
+            console.log('Connection opened:', event);
         };
 
         eventSourceRef.current.onmessage = (event) => {
@@ -39,11 +42,13 @@ export default function DeploymentLogs(props: PropsParams) {
             eventSourceRef.current?.close();
         };
 
+        // Cleanup on component unmount
         return () => {
             console.log('Closing connection');
             eventSourceRef.current?.close();
         };
     }, [name, buildNumber]);
+
 
     useEffect(() => {
         if (logContainerRef.current) {
