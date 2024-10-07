@@ -127,10 +127,14 @@ export default function HomePage() {
                                 animate={{opacity: 1, x: 0}}
                                 transition={{duration: 0.8, delay: 0.6}}
                             >
-                                <Link href="/projects"
-                                      className="bg-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50">
-                                    View Projects
+                                <Link href={"/project"}
+                                >
+                                    <button
+                                        className="bg-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/50">
+                                        View Projects
+                                    </button>
                                 </Link>
+
                             </motion.div>
                             <motion.div
                                 initial={{opacity: 0, x: 20}}
