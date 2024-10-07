@@ -14,41 +14,42 @@ export default function DeploymentLogs(props: PropsParams) {
     const buildNumber = props.params.buildNumber;
 
     const [logs, setLogs] = useState<string[]>([]);
-    const [isDeploying, setIsDeploying] = useState(true); // Define state for deployment status
+    const [isDeploying, setIsDeploying] = useState(true);
     const eventSourceRef = useRef<EventSource | null>(null);
     const logContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Initialize EventSource
+        console.log(`Connecting to: ${process.env.NEXT_PUBLIC_BASE_URL}/stream-build-log/${name}/${buildNumber}`);
+
         eventSourceRef.current = new EventSource(`${process.env.NEXT_PUBLIC_BASE_URL}/stream-build-log/${name}/${buildNumber}`);
 
-        // Handle incoming log messages (plain text)
-        eventSourceRef.current.onmessage = (event) => {
-            // Split the event data by newline and append each line as a separate log entry
-            const newLogs = event.data.split('\n');
-            setLogs(prevLogs => [...prevLogs, ...newLogs]); // Append new logs to the state
+        eventSourceRef.current.onopen = () => {
+            console.log('Connection opened');
         };
 
-        // Handle error or stream closure
+        eventSourceRef.current.onmessage = (event) => {
+            console.log('Received message:', event.data);
+            const newLogs = event.data.split('\n');
+            setLogs(prevLogs => [...prevLogs, ...newLogs]);
+        };
+
         eventSourceRef.current.onerror = (error) => {
             console.error('EventSource failed:', error);
-            setIsDeploying(false); // Set deployment as completed on error
+            setIsDeploying(false);
             eventSourceRef.current?.close();
         };
 
         return () => {
-            eventSourceRef.current?.close(); // Cleanup event source on unmount
+            console.log('Closing connection');
+            eventSourceRef.current?.close();
         };
     }, [name, buildNumber]);
 
     useEffect(() => {
-        // Scroll to the bottom of the log container when new logs are added
         if (logContainerRef.current) {
             logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
         }
     }, [logs]);
-
-    console.log(logs);
 
     return (
         <div className="min-h-screen bg-black text-white p-6">
