@@ -27,7 +27,7 @@ export default function NavbarComponent() {
                                 height={32}
                                 className="rounded-full"
                             />
-                            <span className="font-semibold hidden sm:inline">SpringOps</span>
+                            <span className="font-semibold hidden sm:inline">SpringOps4</span>
                             <span className="px-2 py-1 text-xs rounded-full hidden sm:inline bg-gray-700">
                 Hobby
               </span>
