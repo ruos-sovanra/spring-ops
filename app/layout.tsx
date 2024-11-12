@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     description: 'A clone of the Vercel dashboard using Next.js and Tailwind CSS',
 }
 
+
+
 export default function RootLayout({
                                        children,
                                    }: {
